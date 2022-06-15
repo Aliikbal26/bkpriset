@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+
+    <link rel="stylesheet" href="asset/dist/sweetalert2.min.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log Book</title>
+</head>
+
+<body>
+    <div class="container mt-4 ">
+        <div class="row">
+            <div class="col text-center">
+                <h1>Log Book BKP Riset</h1>
+            </div>
+        </div>
+        <div class="row justify-content-center pb-3">
+            <div class="col-md-8 pb-3 mt-2">
+                <div class="alert alert-success d-none alert-dismissible fade show" role="alert">
+                    <strong>Success!</strong> Data anda berhasil dikirim
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <form name="googlesheet" action="" method="post">
+                    <label for="name">Nama</label>
+                    <input type="text" class="form-control" name="name" id="name">
+                    <label for="bulan">Bulan</label>
+                    <select name="bulan" class="form-select" id="bulan">
+                        <option value="Mei">Mei</option>
+                        <option value="Juni">Juni</option>
+                        <option value="Juli">Juli</option>
+                        <option value="Agustus">Agustus</option>
+
+                    </select>
+                    <label for="minggu">Minggu ke</label>
+                    <input type="number" name="minggu" class="form-control" id="minggu">
+                    <label for="foto">Foto</label>
+                    <input type="file" name="foto" class="form-control" id="foto">
+                    <label for="log"> Log Book</label>
+                    <textarea class="form-control" name="log" id="log" cols="30" rows="5"></textarea><br>
+                    <button type="submit" name="submit" id="submit" class="btn btn-kirim btn-primary">Kirim</button>
+                    <button type="button" class="btn btn-primary btn-loading d-none" disabled>
+                        <span class="spinner-border spinner-border-sm " role="status" aria-hidden="true"></span>
+                        Loading...
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- <button class="ok" onclick="swal.fire('terimakasih')">simpan</button> -->
+
+
+
+
+    <script src="asset/dist/sweetalert2.all.min.js"></script>
+
+
+    <!-- form google sheet -->
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbz9xAplTk74zJ_1lreI5aFw5UcW8YHAJMYyk88izqMWWhHiRZYp_n35VdIF_84S9HzNOw/exec'
+        const form = document.forms['googlesheet']
+        // const form = document.forms['name'];
+        const btnKirim = document.querySelector('.btn-kirim');
+        const btnLoading = document.querySelector('.btn-loading');
+        const Alert = document.querySelector('.alert');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            btnLoading.classList.toggle('d-none');
+            btnKirim.classList.toggle('d-none')
+            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                .then(response => {
+                    btnLoading.classList.toggle('d-none');
+                    btnKirim.classList.toggle('d-none')
+                    Alert.classList.toggle('d-none');
+                    form.reset();
+                    console.log('Success!', response)
+                })
+                .catch(error => console.error('Error!', error.message))
+        })
+    </script>
+    <!-- end google sheet -->
+    <script src="bootstrap/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="bootstrap/js/bootstrap.js">
+</body>
+
+</html>
