@@ -98,6 +98,7 @@
                     Swal.fire({
                         // position: "top-end",
                         type: "success",
+                        icon: "success",
                         title: "Data anda berhasil di kirim!",
                         showConfirmButton: false,
                         timer: 2500
@@ -107,6 +108,19 @@
                     console.log('Success!', response)
                 })
                 .catch(error => console.error('Error!', error.message))
+
+            Swal.fire({
+                // position: "top-end",
+                type: "error",
+                icon: "error",
+                title: "Data anda gagal kirim!",
+                //title: error('Error!', error.message),
+                showConfirmButton: false,
+                timer: 2500
+            });
+            btnLoading.classList.toggle('d-none');
+            btnKirim.classList.toggle('d-none');
+            form.reset();
         })
     </script>
     <!-- end google sheet -->
