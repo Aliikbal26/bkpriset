@@ -46,12 +46,14 @@
                     <input type="text" class="form-control" name="name" id="name">
                     <label for="bulan" class="my-1">Bulan</label>
                     <select name="bulan" class="form-select" id="bulan">
-                        <option value="Mei">Mei</option>
                         <option value="Juni">Juni</option>
                         <option value="Juli">Juli</option>
                         <option value="Agustus">Agustus</option>
+                        <option value="September">September</option>
 
                     </select>
+                    <label for="tanggal" class="my-1">Tanggal</label>
+                    <input type="date" class="form-control" name="tanggal" id="tanggal">
                     <label for="minggu" class="my-1">Minggu ke</label>
                     <input type="number" name="minggu" class="form-control" id="minggu">
                     <label for="foto" class="my-1">Foto</label>
@@ -103,24 +105,11 @@
                         showConfirmButton: false,
                         timer: 2500
                     });
-                    //Alert.classList.toggle('d-none');
-                    form.reset();
-                    console.log('Success!', response)
+                    form.reset()
                 })
                 .catch(error => console.error('Error!', error.message))
 
-            Swal.fire({
-                // position: "top-end",
-                type: "error",
-                icon: "error",
-                title: "Data anda gagal kirim!",
-                //title: error('Error!', error.message),
-                showConfirmButton: false,
-                timer: 2500
-            });
-            btnLoading.classList.toggle('d-none');
-            btnKirim.classList.toggle('d-none');
-            form.reset();
+
         })
     </script>
     <!-- end google sheet -->
